@@ -6,8 +6,8 @@ Domain: **faris-abdeldayem.de** (Datei `CNAME` ist schon gesetzt)
 | Seite | Inhalt |
 |---|---|
 | `index.html` | Hero mit 3-Min-Video, Zahlen, Story-Teaser, Vorteile, Partner-Videos, Incentive-Reisen, „Passt du ins Team?“, Ablauf, FAQ |
-| `ueber-mich.html` | Story + Zeitstrahl (Fachabi → 2021 Telko-Vertrieb → 2023 Energievertrieb → Bezirksdirektor) |
-| `moeglichkeit.html` | Produkt, Vorteile, **Karriereplan mit allen 11 Stufen** (du = Stufe 8), Arbeitsalltag |
+| `ueber-mich.html` | Story + Zeitstrahl (Fachabi → 2021 Telko-Vertrieb → 2023 Energievertrieb → heute Führungskraft) |
+| `moeglichkeit.html` | Produkt, Vorteile, **Karriereplan mit allen 11 Stufen** , Arbeitsalltag |
 | `erfolgsgeschichten.html` | 8 Partner-Videos (Hochformat, am Handy wischbar) |
 | `bewerben.html` | Bewerbung in 6 Schritten (Alter, Situation, Vollzeit, Door-to-Door, Ziel, Kontakt) |
 | `impressum.html`, `datenschutz.html` | Entwürfe – Daten ergänzen und prüfen lassen |
@@ -33,7 +33,7 @@ Einfach Dateien mit **genau diesem Namen** in den Ordner legen – sie erscheine
 Namen/Texte der Partner stehen in `_src/pages/*.html` (Platzhalter „Name Partner 1“). Nach Änderungen dort: `python3 _src/build.py .`
 
 ## 3. Skript für dein 3-Minuten-Video
-1. **Hook (0–15 s):** „Ich habe mein Fachabi abgebrochen – heute bin ich Bezirksdirektor im Energievertrieb und führe ein Team mit über 50 Leuten. In den nächsten 3 Minuten erzähl ich dir, wie.“
+1. **Hook (0–15 s):** „Ich habe mein Fachabi abgebrochen – heute führe ich im Energievertrieb ein Team mit über 50 Leuten. In den nächsten 3 Minuten erzähl ich dir, wie.“
 2. **Wer ich bin (15–60 s):** Schule, 2021 Telko-Vertrieb, was du dort gelernt hast, 2023 Wechsel in den Energievertrieb.
 3. **Was wir machen (60–120 s):** Strom & Gas, jeder braucht es, Kunden sparen. Door-to-Door, Team, Karriereplan (11 Stufen), Reisen.
 4. **Für wen (120–160 s):** 18–30, Vollzeit, hungrig, Quereinsteiger willkommen. Ehrlich sagen: Es ist Arbeit.
@@ -71,7 +71,7 @@ Jede Bewerbung enthält auch Quelle/Kampagne aus dem Link (UTM).
 
 **Creatives (Hochformat-Videos funktionieren am besten):**
 - Ausschnitte aus deinem 3-Min-Video (die stärksten 20–30 Sek.)
-- „Fachabi abgebrochen → Bezirksdirektor“-Story
+- „Fachabi abgebrochen → heute Führungskraft mit 50+ Partnern“-Story
 - Partner-Testimonials (vorher → heute)
 - Reise-Clips (Dubai, Türkei, Sylt) + „Das ist unser Team“
 - „Ein Tag Door-to-Door mit uns“

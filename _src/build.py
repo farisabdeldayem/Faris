@@ -70,7 +70,7 @@ FOOT = """</main>
     <div class="footer-grid">
       <div>
         <a class="logo" href="./"><span class="logo-mark">FA</span>Faris Abdel Dayem</a>
-        <p>Selbstständiger Vertriebspartner im Energievertrieb · Bezirksdirektor · NRW &amp; deutschlandweit</p>
+        <p>Selbstständiger Vertriebspartner im Energievertrieb · NRW &amp; deutschlandweit</p>
       </div>
       <ul>
         <li><a href="ueber-mich.html">Über mich</a></li>
