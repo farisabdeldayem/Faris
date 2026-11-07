@@ -40,6 +40,7 @@ document.querySelectorAll(".player").forEach((box) => {
   const src = video.dataset.src;
   // Prüfen, ob die Videodatei existiert (lädt nur die Kopfdaten)
   video.preload = "metadata";
+  video.poster = src.replace(/\.mp4$/, ".jpg"); // Vorschaubild mit gleichem Namen
   video.src = src + "#t=0.1";
   video.addEventListener("error", () => box.classList.add("missing"));
   const start = () => {

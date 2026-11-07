@@ -26,7 +26,7 @@ Einfach Dateien mit **genau diesem Namen** in den Ordner legen – sie erscheine
 - `reisen/dubai.jpg`, `reisen/tuerkei.jpg`, `reisen/sylt.jpg`, `reisen/event-1.jpg`, `reisen/ehrung.jpg`
 
 **Videos** (`assets/videos/`, MP4, H.264, möglichst < 40 MB)
-- `faris-intro.mp4` – dein 3-Minuten-Video (Hochformat 4:5 oder 9:16)
+- `faris-intro.mp4` – dein Vorstellungsvideo (ist drin: 2:27 Min., Querformat, mit Schlussbild „Trag dich jetzt ein“)
 - `partner-1.mp4` … `partner-8.mp4` – Erfolgsgeschichten (Hochformat 9:16, 30–90 Sek.)
 - Optional ein Vorschaubild: gleicher Name als `.jpg`
 
