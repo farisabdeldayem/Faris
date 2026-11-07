@@ -7,12 +7,12 @@ Domain: **faris-abdeldayem.de** (Datei `CNAME` ist schon gesetzt)
 |---|---|
 | `index.html` | Hero mit 3-Min-Video, Zahlen, Story-Teaser, Vorteile, Partner-Videos, Incentive-Reisen, „Passt du ins Team?“, Ablauf, FAQ |
 | `ueber-mich.html` | Story + Zeitstrahl (Fachabi → 2021 Telko-Vertrieb → 2023 Energievertrieb → heute Führungskraft) |
-| `moeglichkeit.html` | Produkt, Vorteile, **Karriereplan mit allen 11 Stufen** , Arbeitsalltag |
+| `moeglichkeit.html` | Produkt, Vorteile, Arbeitsalltag |
 | `erfolgsgeschichten.html` | 8 Partner-Videos (Hochformat, am Handy wischbar) |
 | `bewerben.html` | Bewerbung in 6 Schritten (Alter, Situation, Vollzeit, Door-to-Door, Ziel, Kontakt) |
 | `impressum.html`, `datenschutz.html` | Entwürfe – Daten ergänzen und prüfen lassen |
 
-Unterschiede zu Max' Seite: Weiß/Grün statt Hellblau/Serifen, Video direkt oben, eigener Bewerbungs-Funnel statt externem Tool, Karriereleiter, „Passt du / passt du nicht“-Filter, Reisen-Galerie.
+Unterschiede zu Max' Seite: Weiß/Grün statt Hellblau/Serifen, Video direkt oben, eigener Bewerbungs-Funnel statt externem Tool, „Passt du / passt du nicht“-Filter, Reisen-Galerie.
 
 ## 2. Fotos & Videos einfügen
 Einfach Dateien mit **genau diesem Namen** in den Ordner legen – sie erscheinen automatisch, bis dahin steht ein Platzhalter da.
@@ -35,7 +35,7 @@ Namen/Texte der Partner stehen in `_src/pages/*.html` (Platzhalter „Name Partn
 ## 3. Skript für dein 3-Minuten-Video
 1. **Hook (0–15 s):** „Ich habe mein Fachabi abgebrochen – heute führe ich im Energievertrieb ein Team mit über 50 Leuten. In den nächsten 3 Minuten erzähl ich dir, wie.“
 2. **Wer ich bin (15–60 s):** Schule, 2021 Telko-Vertrieb, was du dort gelernt hast, 2023 Wechsel in den Energievertrieb.
-3. **Was wir machen (60–120 s):** Strom & Gas, jeder braucht es, Kunden sparen. Door-to-Door, Team, Karriereplan (11 Stufen), Reisen.
+3. **Was wir machen (60–120 s):** Strom & Gas, jeder braucht es, Kunden sparen. Door-to-Door, Team, Aufstieg nach Leistung, Reisen.
 4. **Für wen (120–160 s):** 18–30, Vollzeit, hungrig, Quereinsteiger willkommen. Ehrlich sagen: Es ist Arbeit.
 5. **Call-to-Action (160–180 s):** „Wenn du dich wiedererkennst: Klick unten auf ‚Jetzt bewerben‘. 60 Sekunden, wir melden uns in 24 Stunden.“
 

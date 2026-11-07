@@ -54,16 +54,6 @@ document.querySelectorAll(".player").forEach((box) => {
   video.addEventListener("pause", () => { if (video.ended) box.classList.remove("playing"); });
 });
 
-/* ---------- Beim Scrollen einblenden ---------- */
-(() => {
-  const els = document.querySelectorAll(".reveal");
-  if (!("IntersectionObserver" in window)) return els.forEach((e) => e.classList.add("in"));
-  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
-    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-  }), { rootMargin: "0px 0px -8% 0px" });
-  els.forEach((e) => io.observe(e));
-})();
-
 /* ---------- Sticky-Button am Handy ausblenden, wenn ein anderer CTA sichtbar ist ---------- */
 (() => {
   const sticky = document.querySelector(".sticky-cta");
