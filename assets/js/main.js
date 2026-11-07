@@ -23,11 +23,15 @@ const CONFIG = {
 })();
 
 /* ---------- Bilder: Platzhalter zeigen, solange das Foto fehlt ---------- */
+// Ausgeblendete (optionale) Fotos sofort laden, damit sie erscheinen, sobald die Datei da ist
+document.querySelectorAll(".media[data-optional] img, .gallery-section img").forEach((img) => { img.loading = "eager"; });
 document.querySelectorAll(".media img").forEach((img) => {
   const box = img.closest(".media");
   const fail = () => box.classList.add("missing");
-  if (img.complete && img.naturalWidth === 0) fail();
+  const ok = () => box.classList.add("loaded");
+  if (img.complete) (img.naturalWidth === 0 ? fail : ok)();
   img.addEventListener("error", fail);
+  img.addEventListener("load", ok);
 });
 
 /* ---------- Videos: Klick zum Abspielen, Platzhalter wenn Datei fehlt ---------- */

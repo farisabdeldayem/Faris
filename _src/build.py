@@ -20,8 +20,9 @@ def icons(html):
 def media(html):
     # {{img:pfad|Beschriftung|klasse}}
     def img(m):
-        path, label, cls = (m.group(1).split("|")+["",""])[:3]
-        return f'<div class="media {cls}"><img src="{path}" alt="{label}" loading="lazy"><div class="ph">{label}<small>{path}</small></div></div>'
+        path, label, cls, opt = (m.group(1).split("|")+["","",""])[:4]
+        flag = " data-optional" if opt == "optional" else ""
+        return f'<div class="media {cls}"{flag}><img src="{path}" alt="{label}" loading="lazy"><div class="ph">{label}<small>{path}</small></div></div>'
     html = re.sub(r"\{\{img:([^}]+)\}\}", img, html)
     # {{video:pfad|Titel|Untertitel|klasse}}
     def vid(m):

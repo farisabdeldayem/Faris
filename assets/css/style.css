@@ -116,6 +116,12 @@ strong{font-weight:700;color:var(--ink)}
 .media .ph small{font-weight:500;opacity:.65;font-size:.75rem;word-break:break-all}
 .media.missing .ph{display:flex}
 .media.missing img{visibility:hidden}
+/* Optionale Fotos: ausblenden, solange die Datei fehlt */
+.media[data-optional]:not(.loaded){display:none}
+.split:has(.media[data-optional]:not(.loaded)){grid-template-columns:1fr}
+.split:has(.media[data-optional]:not(.loaded)) .lede{max-width:760px}
+/* Reisen-Galerie erst zeigen, wenn mindestens ein Foto da ist */
+.gallery-section:not(:has(.media.loaded)){display:none}
 
 /* Video-Player */
 .player{cursor:pointer}
