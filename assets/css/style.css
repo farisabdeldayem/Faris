@@ -68,6 +68,8 @@ strong{font-weight:700;color:var(--ink)}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;height:var(--nav);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav-inner{max-width:var(--max);margin:0 auto;height:100%;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .logo{font-family:var(--head);font-weight:800;font-size:1.1rem;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.logo img{height:30px;width:auto;display:block}
+.footer .logo img{height:52px}
 .logo-mark{width:34px;height:34px;border-radius:10px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:.85rem;letter-spacing:0}
 .nav-links{display:flex;align-items:center;gap:26px;list-style:none}
 .nav-links a{font-size:.92rem;font-weight:500;color:var(--muted);transition:color .2s}

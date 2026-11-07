@@ -13,6 +13,8 @@ ICONS = {
  "bolt":'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
  "school":'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>',
  "home":'<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/>',
+ "heart":'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+ "run":'<circle cx="14" cy="4.5" r="2"/><path d="M8 21l3-6 3 2v5M6 12l3-4 4 1 3 3 3 1M11 15l-2-3"/>',
  "plane":'<path d="M10.5 13.5 3 11l1.5-1.5 8 1L17 6a2 2 0 0 1 3 3l-4.5 4.5 1 8L15 23l-2.5-7.5"/>',
 }
 def icons(html):
@@ -54,7 +56,7 @@ HEAD = """<!doctype html>
 <body>
 <header class="nav">
   <div class="nav-inner">
-    <a class="logo" href="./"><span class="logo-mark">FA</span>Faris Abdel Dayem</a>
+    <a class="logo" href="./" aria-label="Faris Abdel Dayem – Startseite"><img src="assets/img/logo/logo-kurz.svg" alt="Faris Abdel Dayem" width="226" height="31"></a>
     <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
     <ul class="nav-links">
 {links}
@@ -69,7 +71,7 @@ FOOT = """</main>
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <a class="logo" href="./"><span class="logo-mark">FA</span>Faris Abdel Dayem</a>
+        <a class="logo" href="./" aria-label="Faris Abdel Dayem – Startseite"><img src="assets/img/logo/logo-weiss.svg" alt="Faris Abdel Dayem – Führungskraft im Energievertrieb" width="300" height="56"></a>
         <p>Führungskraft im Energievertrieb · NRW &amp; deutschlandweit</p>
       </div>
       <ul>
