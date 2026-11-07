@@ -196,8 +196,9 @@ strong{font-weight:700;color:var(--ink)}
 .fit .no li::before{content:"✕";background:#fff;color:#9aa8a0;border:1px solid var(--line)}
 
 /* ===== Ablauf ===== */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:st}
-.step{counter-increment:st;position:relative;padding:28px;background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;counter-reset:st}
+.step h3{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.step{counter-increment:st;position:relative;padding:24px 22px;background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
 .step::before{content:"0" counter(st);font-family:var(--head);font-weight:800;font-size:2.4rem;color:var(--bg-tint);-webkit-text-stroke:1.5px var(--green);display:block;line-height:1;margin-bottom:14px}
 .step p{color:var(--muted)}
 
@@ -301,6 +302,7 @@ strong{font-weight:700;color:var(--ink)}
   .stat:nth-child(2){border-right:0}
   .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .cards{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
   .reels.four{grid-template-columns:repeat(2,1fr)}
 }
 

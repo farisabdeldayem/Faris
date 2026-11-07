@@ -53,7 +53,7 @@ HEAD = """<!doctype html>
 <body>
 <header class="nav">
   <div class="nav-inner">
-    <a class="logo" href="./"><span class="logo-mark">FA</span>Faris Abdeldayem</a>
+    <a class="logo" href="./"><span class="logo-mark">FA</span>Faris Abdel Dayem</a>
     <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
     <ul class="nav-links">
 {links}
@@ -68,8 +68,8 @@ FOOT = """</main>
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <a class="logo" href="./"><span class="logo-mark">FA</span>Faris Abdeldayem</a>
-        <p>Selbstständiger Vertriebspartner der Teleson Vertriebs GmbH · Bezirksdirektor · NRW &amp; deutschlandweit</p>
+        <a class="logo" href="./"><span class="logo-mark">FA</span>Faris Abdel Dayem</a>
+        <p>Selbstständiger Vertriebspartner im Energievertrieb · Bezirksdirektor · NRW &amp; deutschlandweit</p>
       </div>
       <ul>
         <li><a href="ueber-mich.html">Über mich</a></li>
@@ -84,7 +84,7 @@ FOOT = """</main>
       </ul>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="y">2026</span> Faris Abdeldayem</span>
+      <span>© <span id="y">2026</span> Faris Abdel Dayem</span>
       <button type="button" data-cookie-settings>Cookie-Einstellungen</button>
     </div>
   </div>
