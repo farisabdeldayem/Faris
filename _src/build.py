@@ -104,6 +104,19 @@ FOOT = """</main>
 </html>
 """
 STICKY = '<a class="sticky-cta" href="bewerben.html">Jetzt in 60 Sek. bewerben →</a>'
+FORM = (SRC/"pages/bewerben.html").read_text()
+FORM = FORM[FORM.index('<form id="funnel"'):FORM.index('</form>')+len('</form>')]
+FUNNEL_HEAD = re.compile(r'<ul class="nav-links">.*?</ul>', re.S)
+FUNNEL_FOOT = """</main>
+<footer class="footer footer-mini">
+  <div class="wrap">
+    <div class="footer-bottom" style="margin-top:0;border-top:0;padding-top:0">
+      <span>© <span id="y">2026</span> Faris Abdel Dayem</span>
+      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <button type="button" data-cookie-settings>Cookie-Einstellungen</button></span>
+    </div>
+  </div>
+</footer>
+"""
 for page in sorted(SRC.glob("pages/*.html")):
     raw = page.read_text()
     meta, body = raw.split("\n---\n", 1)
@@ -112,6 +125,14 @@ for page in sorted(SRC.glob("pages/*.html")):
     links = "\n".join(f'      <li><a href="{h}"{" aria-current=\"page\"" if h==name else ""}>{t}</a></li>' for h,t in NAV)
     canon = "" if name=="index.html" else name
     sticky = "" if m.get("sticky")=="no" else STICKY
-    html = HEAD.format(title=m["title"], desc=m["desc"], canon=canon, links=links) + media(icons(body)) + FOOT.format(sticky=sticky)
+    body = body.replace("{{funnel_form}}", FORM)
+    head = HEAD.format(title=m["title"], desc=m["desc"], canon=canon, links=links)
+    foot = FOOT.format(sticky=sticky)
+    if m.get("funnel") == "yes":
+        head = FUNNEL_HEAD.sub('<a class="btn nav-cta-mini" href="#bewerben">Jetzt bewerben</a>', head).replace('<button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>', '')
+        head = head.replace('<a class="logo" href="./"', '<a class="logo" href="#top"')
+        foot = FUNNEL_FOOT + foot[foot.index('\n<a class="sticky-cta"') if '<a class="sticky-cta"' in foot else foot.index('<div class="consent-bar"'):]
+        foot = foot.replace('href="bewerben.html">Jetzt in 60 Sek. bewerben', 'href="#bewerben">Jetzt in 60 Sek. bewerben')
+    html = head + media(icons(body)) + foot
     (OUT/name).write_text(html)
     print("built", name)

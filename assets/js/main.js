@@ -159,7 +159,7 @@ document.querySelectorAll("[data-play-video]").forEach((btn) => {
 (() => {
   const sticky = document.querySelector(".sticky-cta");
   if (!sticky || !("IntersectionObserver" in window)) return;
-  const targets = document.querySelectorAll(".cta-band, .footer, .hero .btn-row");
+  const targets = document.querySelectorAll(".cta-band, .footer, .hero .btn-row, #bewerben");
   const visible = new Set();
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
