@@ -34,25 +34,113 @@ document.querySelectorAll(".media img").forEach((img) => {
   img.addEventListener("load", ok);
 });
 
-/* ---------- Videos: Klick zum Abspielen, Platzhalter wenn Datei fehlt ---------- */
+/* ---------- Eigener Videoplayer (statt iPhone-Player) ---------- */
+const ICONS = {
+  play: '<svg viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
+  pause: '<svg viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>',
+  sound: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path class="ln" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/></svg>',
+  mute: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path class="ln" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>',
+  full: '<svg viewBox="0 0 24 24"><path class="ln" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
+};
+const fmt = (t) => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); };
+
 document.querySelectorAll(".player").forEach((box) => {
   const video = box.querySelector("video");
   const src = video.dataset.src;
-  // Prüfen, ob die Videodatei existiert (lädt nur die Kopfdaten)
   video.preload = "metadata";
+  video.playsInline = true;
+  video.setAttribute("webkit-playsinline", "");
+  video.controls = false;
   video.poster = src.replace(/\.mp4$/, ".jpg"); // Vorschaubild mit gleichem Namen
-  video.src = src + "#t=0.1";
+  video.src = src;
   video.addEventListener("error", () => box.classList.add("missing"));
-  const start = () => {
-    if (box.classList.contains("missing")) return;
-    document.querySelectorAll(".player.playing video").forEach((v) => v !== video && v.pause());
-    box.classList.add("playing");
-    video.controls = true;
-    video.play();
-    track("ViewContent", { content_name: box.dataset.title || src });
+
+  // Steuerleiste
+  const bar = document.createElement("div");
+  bar.className = "vbar";
+  bar.innerHTML =
+    `<button type="button" class="vbtn vpp" aria-label="Abspielen">${ICONS.play}</button>` +
+    `<span class="vtime"><span class="vcur">0:00</span> / <span class="vdur">0:00</span></span>` +
+    `<div class="vprog" role="slider" aria-label="Video-Position" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="vbuf"></div><div class="vfill"></div><div class="vknob"></div></div>` +
+    `<button type="button" class="vbtn vmute" aria-label="Ton aus">${ICONS.sound}</button>` +
+    `<button type="button" class="vbtn vfull" aria-label="Vollbild">${ICONS.full}</button>`;
+  box.appendChild(bar);
+  const $ = (c) => bar.querySelector(c);
+  const pp = $(".vpp"), mute = $(".vmute"), full = $(".vfull"), prog = $(".vprog");
+
+  let hideTimer;
+  const wake = () => {
+    box.classList.add("ui");
+    clearTimeout(hideTimer);
+    if (!video.paused) hideTimer = setTimeout(() => box.classList.remove("ui"), 2600);
   };
-  box.querySelector(".play").addEventListener("click", start);
-  video.addEventListener("pause", () => { if (video.ended) box.classList.remove("playing"); });
+  const toggle = () => {
+    if (box.classList.contains("missing")) return;
+    if (video.paused || video.ended) {
+      document.querySelectorAll(".player video").forEach((v) => v !== video && v.pause());
+      video.play();
+      if (!box.classList.contains("started")) {
+        box.classList.add("started");
+        track("ViewContent", { content_name: box.dataset.title || src });
+      }
+    } else video.pause();
+  };
+
+  box.querySelector(".play").addEventListener("click", toggle);
+  let uiBeforeTouch = true;
+  video.addEventListener("click", () => {
+    // Am Handy: erster Tipp zeigt nur die Steuerung, zweiter Tipp pausiert
+    const touch = matchMedia("(hover:none)").matches;
+    if (!touch || uiBeforeTouch || video.paused) toggle();
+    wake();
+  });
+  pp.addEventListener("click", (e) => { e.stopPropagation(); toggle(); wake(); });
+  mute.addEventListener("click", (e) => { e.stopPropagation(); video.muted = !video.muted; wake(); });
+  full.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const req = box.requestFullscreen || box.webkitRequestFullscreen;
+    if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    else if (req) req.call(box).catch?.(() => video.webkitEnterFullscreen?.());
+    else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen(); // iPhone
+  });
+  box.addEventListener("mousemove", wake);
+  box.addEventListener("touchstart", () => { uiBeforeTouch = box.classList.contains("ui"); wake(); }, { passive: true });
+
+  video.addEventListener("play", () => { box.classList.add("playing"); pp.innerHTML = ICONS.pause; pp.setAttribute("aria-label", "Pause"); wake(); });
+  video.addEventListener("pause", () => { box.classList.remove("playing"); pp.innerHTML = ICONS.play; pp.setAttribute("aria-label", "Abspielen"); wake(); });
+  video.addEventListener("ended", () => { box.classList.remove("playing"); box.classList.add("ui"); });
+  video.addEventListener("volumechange", () => { mute.innerHTML = video.muted ? ICONS.mute : ICONS.sound; mute.setAttribute("aria-label", video.muted ? "Ton an" : "Ton aus"); });
+  video.addEventListener("loadedmetadata", () => { $(".vdur").textContent = fmt(video.duration); });
+  video.addEventListener("waiting", () => box.classList.add("loading"));
+  video.addEventListener("playing", () => box.classList.remove("loading"));
+  video.addEventListener("timeupdate", () => {
+    const p = video.duration ? (video.currentTime / video.duration) * 100 : 0;
+    $(".vfill").style.width = p + "%";
+    $(".vknob").style.left = p + "%";
+    $(".vcur").textContent = fmt(video.currentTime);
+    prog.setAttribute("aria-valuenow", Math.round(p));
+  });
+  video.addEventListener("progress", () => {
+    if (video.buffered.length && video.duration) $(".vbuf").style.width = (video.buffered.end(video.buffered.length - 1) / video.duration) * 100 + "%";
+  });
+
+  // Spulen per Tippen/Ziehen
+  const seek = (x) => {
+    const r = prog.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (x - r.left) / r.width));
+    if (video.duration) video.currentTime = p * video.duration;
+  };
+  prog.addEventListener("pointerdown", (e) => {
+    e.stopPropagation(); prog.setPointerCapture(e.pointerId); box.classList.add("seeking"); seek(e.clientX);
+    const move = (ev) => seek(ev.clientX);
+    const up = () => { box.classList.remove("seeking"); prog.removeEventListener("pointermove", move); prog.removeEventListener("pointerup", up); wake(); };
+    prog.addEventListener("pointermove", move); prog.addEventListener("pointerup", up);
+  });
+  prog.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") video.currentTime += 5;
+    if (e.key === "ArrowLeft") video.currentTime -= 5;
+  });
+  bar.addEventListener("click", (e) => e.stopPropagation());
 });
 
 /* ---------- Sticky-Button am Handy ausblenden, wenn ein anderer CTA sichtbar ist ---------- */

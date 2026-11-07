@@ -123,19 +123,41 @@ strong{font-weight:700;color:var(--ink)}
 /* Reisen-Galerie erst zeigen, wenn mindestens ein Foto da ist */
 .gallery-section:not(:has(.media.loaded)){display:none}
 
-/* Video-Player */
-.player{cursor:pointer}
+/* Eigener Video-Player */
+.player{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .player video{background:#0b1a13}
-.player .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,transparent 40%,rgba(5,25,16,.55));transition:opacity .25s;border:0;cursor:pointer;width:100%}
-.player .play i{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .2s}
-.player:hover .play i{transform:scale(1.07)}
-.player .play i::before{content:"";margin-left:5px;border-left:20px solid var(--green);border-top:12px solid transparent;border-bottom:12px solid transparent}
-.player .meta{position:absolute;left:18px;right:18px;bottom:16px;color:#fff;font-weight:700;text-align:left;pointer-events:none;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.player .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,transparent 40%,rgba(5,25,16,.55));transition:opacity .3s;border:0;cursor:pointer;width:100%;z-index:2}
+.player .play i{width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1.5px solid rgba(255,255,255,.55);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .2s,background .2s}
+.player .play i::before{content:"";margin-left:5px;border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent}
+.player:hover .play i{transform:scale(1.07);background:var(--green);border-color:var(--green)}
+.player .meta{position:absolute;left:18px;right:18px;bottom:16px;color:#fff;font-weight:700;text-align:left;pointer-events:none;text-shadow:0 1px 8px rgba(0,0,0,.4);z-index:3;transition:opacity .3s}
 .player .meta small{display:block;font-weight:500;opacity:.9;font-size:.82rem}
-.player.playing .play,.player.playing .meta{opacity:0;pointer-events:none}
-.player.missing .play,.player.missing .meta{display:none}
+.player.started .play,.player.started .meta{opacity:0;pointer-events:none}
+.player.missing .play,.player.missing .meta,.player.missing .vbar{display:none}
 .player.missing video{visibility:hidden}
 .hero-video .meta{font-size:1.05rem}
+/* Steuerleiste */
+.vbar{position:absolute;left:12px;right:12px;bottom:12px;z-index:4;display:flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;border-radius:999px;background:rgba(8,28,19,.55);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid rgba(255,255,255,.14);color:#fff;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
+.player.started.ui .vbar,.player.started:not(.playing) .vbar,.player.seeking .vbar{opacity:1;transform:none;pointer-events:auto}
+.vbtn{flex:none;width:38px;height:38px;border-radius:50%;border:0;background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .2s}
+.vbtn:hover{background:rgba(255,255,255,.14)}
+.vbtn.vpp{background:var(--green)}
+.vbtn.vpp:hover{background:var(--green-deep)}
+.vbtn svg{width:20px;height:20px;fill:#fff}
+.vbtn svg .ln{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vtime{flex:none;font-size:.78rem;font-weight:600;font-variant-numeric:tabular-nums;opacity:.9;white-space:nowrap}
+.vprog{position:relative;flex:1;min-width:40px;height:22px;cursor:pointer;touch-action:none}
+.vprog::before,.vbuf,.vfill{content:"";position:absolute;left:0;top:50%;height:4px;margin-top:-2px;border-radius:4px}
+.vprog::before{right:0;background:rgba(255,255,255,.22)}
+.vbuf{width:0;background:rgba(255,255,255,.35)}
+.vfill{width:0;background:var(--green)}
+.vknob{position:absolute;top:50%;left:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.35);transform:scale(.8);transition:transform .15s}
+.vprog:hover .vknob,.player.seeking .vknob{transform:scale(1.15)}
+.player.loading.playing::after{content:"";position:absolute;left:50%;top:50%;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;animation:vspin .8s linear infinite;z-index:3}
+@keyframes vspin{to{transform:rotate(360deg)}}
+.player:fullscreen{border-radius:0;background:#000}
+.player:fullscreen video{object-fit:contain}
+@media (max-width:680px){.vtime .vdur,.vtime{font-size:.72rem}.vbar{left:8px;right:8px;bottom:8px;gap:6px}.vbtn{width:34px;height:34px}}
 
 /* ===== Zahlen ===== */
 .stats{margin-top:-36px;position:relative;z-index:2}
