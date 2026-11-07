@@ -11,62 +11,40 @@ sticky: no
     </div>
 
     <form id="funnel" class="funnel" novalidate>
-      <div class="progress"><span class="count">Schritt 1 von 6</span><div class="track"><div class="bar"></div></div></div>
+      <div class="progress"><span class="count">Schritt 1 von 4</span><div class="track"><div class="bar"></div></div></div>
 
       <fieldset class="q">
-        <legend>Wie alt bist du?</legend>
-        <p class="hint">Wir suchen vor allem Leute zwischen 18 und 30.</p>
-        <label class="opt"><input type="radio" name="Alter" value="unter 18"><span class="dot"></span>Unter 18</label>
-        <label class="opt"><input type="radio" name="Alter" value="18-24"><span class="dot"></span>18 – 24</label>
-        <label class="opt"><input type="radio" name="Alter" value="25-30"><span class="dot"></span>25 – 30</label>
-        <label class="opt"><input type="radio" name="Alter" value="über 30"><span class="dot"></span>Über 30</label>
+        <legend>Hast du Erfahrung im Vertrieb?</legend>
+        <p class="hint">Frage 1 von 3</p>
+        <label class="opt"><input type="radio" name="Erfahrung im Vertrieb" value="Ja, habe ich."><span class="dot"></span>Ja, habe ich.</label>
+        <label class="opt"><input type="radio" name="Erfahrung im Vertrieb" value="Nein, noch nicht."><span class="dot"></span>Nein, noch nicht.</label>
       </fieldset>
 
       <fieldset class="q">
-        <legend>Was machst du gerade?</legend>
-        <p class="hint">Egal was – jeder Weg ist okay.</p>
-        <label class="opt"><input type="radio" name="Situation" value="Schule/Ausbildung/Studium"><span class="dot"></span>Schule, Ausbildung oder Studium</label>
-        <label class="opt"><input type="radio" name="Situation" value="Angestellt"><span class="dot"></span>Angestellt</label>
-        <label class="opt"><input type="radio" name="Situation" value="Selbstständig/Vertrieb"><span class="dot"></span>Selbstständig / schon im Vertrieb</label>
-        <label class="opt"><input type="radio" name="Situation" value="Auf der Suche"><span class="dot"></span>Gerade auf der Suche</label>
+        <legend>Bist du bereit, dich selbstständig zu machen?</legend>
+        <p class="hint">Frage 2 von 3</p>
+        <label class="opt"><input type="radio" name="Bereit für Selbstständigkeit" value="Ja, ich bin bereit."><span class="dot"></span>Ja, ich bin bereit.</label>
+        <label class="opt"><input type="radio" name="Bereit für Selbstständigkeit" value="Nein, auf keinen Fall."><span class="dot"></span>Nein, auf keinen Fall.</label>
       </fieldset>
 
       <fieldset class="q">
-        <legend>Kannst du dir vorstellen, Vollzeit einzusteigen?</legend>
-        <p class="hint">Die besten Ergebnisse erzielen die, die voll dabei sind.</p>
-        <label class="opt"><input type="radio" name="Vollzeit" value="Ja, Vollzeit"><span class="dot"></span>Ja, ich will Vollzeit Gas geben</label>
-        <label class="opt"><input type="radio" name="Vollzeit" value="Erst nebenbei"><span class="dot"></span>Erst nebenbei, später Vollzeit</label>
-        <label class="opt"><input type="radio" name="Vollzeit" value="Nur nebenbei"><span class="dot"></span>Nur nebenbei</label>
+        <legend>Wie viel Zeit pro Woche bringst du mit?</legend>
+        <p class="hint">Frage 3 von 3</p>
+        <label class="opt"><input type="radio" name="Zeit pro Woche" value="unter 20 Stunden"><span class="dot"></span>unter 20 Stunden</label>
+        <label class="opt"><input type="radio" name="Zeit pro Woche" value="über 20 Stunden"><span class="dot"></span>über 20 Stunden</label>
+        <label class="opt"><input type="radio" name="Zeit pro Woche" value="über 40 Stunden"><span class="dot"></span>über 40 Stunden</label>
       </fieldset>
 
       <fieldset class="q">
-        <legend>Bist du bereit, Kunden direkt vor Ort zu beraten (Door-to-Door)?</legend>
-        <p class="hint">Keine Sorge – am Anfang bist du nie allein unterwegs.</p>
-        <label class="opt"><input type="radio" name="Door-to-Door" value="Ja, auf jeden Fall"><span class="dot"></span>Ja, auf jeden Fall</label>
-        <label class="opt"><input type="radio" name="Door-to-Door" value="Kann ich mir vorstellen"><span class="dot"></span>Kann ich mir vorstellen</label>
-        <label class="opt"><input type="radio" name="Door-to-Door" value="Eher nicht"><span class="dot"></span>Eher nicht</label>
-      </fieldset>
-
-      <fieldset class="q">
-        <legend>Was ist dein größtes Ziel?</legend>
-        <p class="hint">Was treibt dich an?</p>
-        <label class="opt"><input type="radio" name="Ziel" value="Mehr Geld verdienen"><span class="dot"></span>Deutlich mehr Geld verdienen</label>
-        <label class="opt"><input type="radio" name="Ziel" value="Finanzielle Freiheit"><span class="dot"></span>Finanzielle Freiheit</label>
-        <label class="opt"><input type="radio" name="Ziel" value="Eigenes Team aufbauen"><span class="dot"></span>Ein eigenes Team aufbauen</label>
-        <label class="opt"><input type="radio" name="Ziel" value="Persönlich wachsen"><span class="dot"></span>Mich persönlich weiterentwickeln</label>
-      </fieldset>
-
-      <fieldset class="q">
-        <legend>Super! Wie erreichen wir dich?</legend>
+        <legend>Wie können wir dich erreichen?</legend>
         <p class="hint">Ich melde mich innerhalb von 24 bis 48 Stunden für ein kurzes Erstgespräch.</p>
         <div class="fields">
-          <div class="field"><label for="f-vn">Vorname</label><input id="f-vn" name="Vorname" required autocomplete="given-name"></div>
-          <div class="field"><label for="f-nn">Nachname</label><input id="f-nn" name="Nachname" required autocomplete="family-name"></div>
-          <div class="field full"><label for="f-tel">Handynummer</label><input id="f-tel" name="Telefon" type="tel" required autocomplete="tel" inputmode="tel" minlength="6" placeholder="z. B. 0151 23456789"></div>
-          <div class="field full"><label for="f-mail">E-Mail</label><input id="f-mail" name="E-Mail" type="email" required autocomplete="email" inputmode="email"></div>
-          <div class="field full"><label for="f-ort">Wohnort</label><input id="f-ort" name="Wohnort" required autocomplete="address-level2" placeholder="z. B. Köln"></div>
+          <div class="field full"><label for="f-name">Dein Vor- und Nachname</label><input id="f-name" name="Name" required autocomplete="name"></div>
+          <div class="field full"><label for="f-plz">Deine Postleitzahl</label><input id="f-plz" name="Postleitzahl" required autocomplete="postal-code" inputmode="numeric" minlength="4" maxlength="5" placeholder="z. B. 44135"></div>
+          <div class="field full"><label for="f-mail">Deine E-Mail-Adresse</label><input id="f-mail" name="E-Mail" type="email" required autocomplete="email" inputmode="email"></div>
+          <div class="field full"><label for="f-tel">Deine Telefonnummer</label><input id="f-tel" name="Telefon" type="tel" required autocomplete="tel" inputmode="tel" minlength="6" placeholder="z. B. 0151 23456789"></div>
         </div>
-        <label class="consent"><input type="checkbox" name="datenschutz" required><span>Ich bin einverstanden, dass meine Angaben zur Kontaktaufnahme gespeichert und verarbeitet werden. Mehr in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</span></label>
+        <label class="consent"><input type="checkbox" name="datenschutz" required><span>Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und akzeptiere sie.</span></label>
         <div class="submit-area"><button class="btn btn-block" type="submit">Bewerbung absenden</button></div>
       </fieldset>
 

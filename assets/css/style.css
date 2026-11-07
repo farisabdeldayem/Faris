@@ -122,6 +122,10 @@ strong{font-weight:700;color:var(--ink)}
 .split:has(.media[data-optional]:not(.loaded)) .lede{max-width:760px}
 /* Reisen-Galerie erst zeigen, wenn mindestens ein Foto da ist */
 .gallery-section:not(:has(.media.loaded)){display:none}
+/* Erfolgsgeschichten: nur Videos zeigen, die es schon gibt */
+.stories-section:not(:has(.player.loaded)){display:none}
+.reel:not(:has(.player.loaded)){display:none}
+section:has(.player.loaded) .stories-soon{display:none}
 
 /* Eigener Video-Player */
 .player{cursor:pointer;-webkit-tap-highlight-color:transparent}

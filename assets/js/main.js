@@ -110,7 +110,7 @@ document.querySelectorAll(".player").forEach((box) => {
   video.addEventListener("pause", () => { box.classList.remove("playing"); pp.innerHTML = ICONS.play; pp.setAttribute("aria-label", "Abspielen"); wake(); });
   video.addEventListener("ended", () => { box.classList.remove("playing"); box.classList.add("ui"); });
   video.addEventListener("volumechange", () => { mute.innerHTML = video.muted ? ICONS.mute : ICONS.sound; mute.setAttribute("aria-label", video.muted ? "Ton an" : "Ton aus"); });
-  video.addEventListener("loadedmetadata", () => { $(".vdur").textContent = fmt(video.duration); });
+  video.addEventListener("loadedmetadata", () => { box.classList.add("loaded"); $(".vdur").textContent = fmt(video.duration); });
   video.addEventListener("waiting", () => box.classList.add("loading"));
   video.addEventListener("playing", () => box.classList.remove("loading"));
   video.addEventListener("timeupdate", () => {
@@ -141,6 +141,18 @@ document.querySelectorAll(".player").forEach((box) => {
     if (e.key === "ArrowLeft") video.currentTime -= 5;
   });
   bar.addEventListener("click", (e) => e.stopPropagation());
+});
+
+/* ---------- Button "Video ansehen": zum Video scrollen und direkt abspielen ---------- */
+document.querySelectorAll("[data-play-video]").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const box = document.querySelector(".hero-video");
+    if (!box || box.classList.contains("missing")) return;
+    e.preventDefault();
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+    const video = box.querySelector("video");
+    if (video.paused) box.querySelector(".play").click();
+  });
 });
 
 /* ---------- Sticky-Button am Handy ausblenden, wenn ein anderer CTA sichtbar ist ---------- */
@@ -238,7 +250,7 @@ function track(event, data) { if (window.fbq) window.fbq("track", event, data ||
     data.Quelle = params.get("utm_source") || "direkt";
     data.Kampagne = params.get("utm_campaign") || "";
     data.Anzeige = params.get("utm_content") || "";
-    data._subject = `Neue Bewerbung: ${data.Vorname} ${data.Nachname}`;
+    data._subject = `Neue Bewerbung: ${data.Name}`;
     data._template = "table";
     data._captcha = "false";
 
