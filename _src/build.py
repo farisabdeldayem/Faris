@@ -46,9 +46,9 @@ HEAD = """<!doctype html>
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="https://faris-abdeldayem.de/assets/img/og.jpg">
+<meta property="og:image" content="https://farisabdeldayem.de/assets/img/og.jpg">
 <meta property="og:locale" content="de_DE">
-<link rel="canonical" href="https://faris-abdeldayem.de/{canon}">
+<link rel="canonical" href="https://farisabdeldayem.de/{canon}">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">

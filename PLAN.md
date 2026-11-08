@@ -1,6 +1,6 @@
 # Faris Abdel Dayem – Website & Meta Ads
 
-Domain: **faris-abdeldayem.de** (Datei `CNAME` ist schon gesetzt)
+Domain: **farisabdeldayem.de** (Datei `CNAME` ist schon gesetzt)
 
 ## 1. Seitenaufbau
 | Seite | Inhalt |
@@ -49,7 +49,7 @@ Gehen per E-Mail an farisabdeldayem@gmail.com über FormSubmit (in `assets/js/ma
 Jede Bewerbung enthält auch Quelle/Kampagne aus dem Link (UTM).
 
 ## 5. Online stellen
-1. Domain **faris-abdeldayem.de** kaufen (IONOS, Strato, Namecheap … ~1–10 €/Jahr)
+1. Domain **farisabdeldayem.de** kaufen (IONOS, Strato, Namecheap … ~1–10 €/Jahr)
 2. Kostenlos hosten mit **Netlify** (Repo verbinden) oder **GitHub Pages**
 3. Beim Domain-Anbieter die DNS-Einträge setzen, die Netlify/GitHub anzeigt
 4. Impressum & Datenschutz ausfüllen und prüfen lassen
@@ -60,14 +60,14 @@ Jede Bewerbung enthält auch Quelle/Kampagne aus dem Link (UTM).
 2. Instagram-Account @farisabdeldayem_ verbinden
 3. Werbekonto anlegen, Zahlungsmethode hinterlegen
 4. Events Manager → Datenquelle „Web“ → **Pixel** erstellen → ID in `assets/js/main.js` bei `metaPixelId` eintragen
-5. Domain faris-abdeldayem.de im Business Manager verifizieren
+5. Domain farisabdeldayem.de im Business Manager verifizieren
 6. Ab dann fragt die Seite nach Cookie-Zustimmung und meldet jede Bewerbung als „Lead“ an Meta
 
 **Kampagne:**
 - Ziel: **Leads**, Conversion-Ort: Website, Event: Lead
 - Budget-Start: 20–30 € pro Tag, 3–5 Anzeigen gleichzeitig testen, nach 5–7 Tagen die Gewinner hochfahren
 - Region: NRW (Schwerpunkt) + später deutschlandweit
-- Links mit UTM, z. B. `https://faris-abdeldayem.de/bewerben.html?utm_source=meta&utm_campaign=recruiting&utm_content=video1`
+- Links mit UTM, z. B. `https://farisabdeldayem.de/bewerben.html?utm_source=meta&utm_campaign=recruiting&utm_content=video1`
 
 **Creatives (Hochformat-Videos funktionieren am besten):**
 - Ausschnitte aus deinem 3-Min-Video (die stärksten 20–30 Sek.)
