@@ -56,7 +56,7 @@ HEAD = """<!doctype html>
 <body>
 <header class="nav">
   <div class="nav-inner">
-    <a class="logo" href="./" aria-label="Faris Abdel Dayem – Startseite"><img src="assets/img/logo/logo-kurz.svg" alt="Faris Abdel Dayem" width="226" height="31"></a>
+    <a class="logo" href="./" aria-label="Faris Abdel Dayem – Startseite"><img src="assets/img/logo/logo-kurz.svg" alt="Faris Abdel Dayem" width="300" height="30"></a>
     <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
     <ul class="nav-links">
 {links}
@@ -71,7 +71,7 @@ FOOT = """</main>
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <a class="logo" href="./" aria-label="Faris Abdel Dayem – Startseite"><img src="assets/img/logo/logo-weiss.svg" alt="Faris Abdel Dayem – Führungskraft im Energievertrieb" width="300" height="56"></a>
+        <a class="logo" href="./" aria-label="Faris Abdel Dayem – Startseite"><img src="assets/img/logo/logo-weiss.svg" alt="Faris Abdel Dayem – Energievertrieb" width="300" height="56"></a>
         <p>Führungskraft im Energievertrieb · NRW &amp; deutschlandweit</p>
       </div>
       <ul>
