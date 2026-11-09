@@ -1,0 +1,4 @@
+exclude:
+  - PLAN.md
+  - PROMPT-FUER-KOLLEGEN.md
+  - README.md
