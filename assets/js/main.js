@@ -4,9 +4,9 @@
 const CONFIG = {
   // Meta Pixel ID (aus dem Meta Business Manager), z. B. "123456789012345"
   metaPixelId: "",
-  // Wohin die Bewerbungen geschickt werden (FormSubmit leitet sie per E-Mail weiter).
-  // Beim allerersten Absenden schickt FormSubmit eine Bestätigungs-Mail – einmal klicken, fertig.
-  leadEmail: "farisabdeldayem@gmail.com",
+  // Web3Forms Access Key (app.web3forms.com) – Bewerbungen kommen per E-Mail an.
+  // Der Schlüssel ist öffentlich gedacht und darf im Code stehen.
+  web3formsKey: "WEB3FORMS_KEY",
 };
 
 /* ---------- Navigation (Burger-Menü am Handy) ---------- */
@@ -250,19 +250,43 @@ function track(event, data) { if (window.fbq) window.fbq("track", event, data ||
     data.Quelle = params.get("utm_source") || "direkt";
     data.Kampagne = params.get("utm_campaign") || "";
     data.Anzeige = params.get("utm_content") || "";
-    data._subject = `Neue Bewerbung: ${data.Name}`;
-    data._template = "table";
-    data._captcha = "false";
+    data.subject = `Neue Bewerbung: ${data.Name}`;
+    data.from_name = "Website farisabdeldayem.de";
+    data.Seite = location.pathname;
+    data.access_key = CONFIG.web3formsKey;
+    if (data["E-Mail"]) data.replyto = data["E-Mail"]; // "Antworten" geht direkt an den Bewerber
 
-    try {
-      if (CONFIG.leadEmail) {
-        await fetch(`https://formsubmit.co/ajax/${CONFIG.leadEmail}`, {
+    // Übergangslösung: ohne Web3Forms-Schlüssel weiter über FormSubmit senden
+    const useWeb3 = /^[0-9a-f-]{30,}$/i.test(CONFIG.web3formsKey);
+    let ok = false;
+    if (!useWeb3) {
+      try {
+        await fetch("https://formsubmit.co/ajax/farisabdeldayem@gmail.com", {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ ...data, _subject: data.subject, _template: "table", _captcha: "false" }),
         });
-      }
-    } catch (_) { /* Danke-Seite trotzdem zeigen */ }
+      } catch (_) {}
+      ok = true;
+    } else try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      });
+      ok = res.ok && (await res.json()).success;
+    } catch (_) { ok = false; }
+
+    if (!ok) {
+      // Fehler sichtbar machen, statt die Bewerbung still zu verlieren
+      btn.disabled = false;
+      btn.textContent = "Bewerbung absenden";
+      const p = document.createElement("p");
+      p.className = "err";
+      p.textContent = "Das Senden hat nicht geklappt. Bitte versuch es gleich nochmal.";
+      step.querySelector(".submit-area").before(p);
+      return;
+    }
     track("Lead");
     show(total);
   });
