@@ -6,7 +6,7 @@ const CONFIG = {
   metaPixelId: "",
   // Web3Forms Access Key (app.web3forms.com) – Bewerbungen kommen per E-Mail an.
   // Der Schlüssel ist öffentlich gedacht und darf im Code stehen.
-  web3formsKey: "", // Web3Forms (85950f0c-e257-4610-a3b2-0d167ff2d366) pausiert, bis die Zustellung bestätigt ist
+  web3formsKey: "85950f0c-e257-4610-a3b2-0d167ff2d366",
   // FormSubmit-Adresse als geschützter Code statt Klartext-E-Mail
   formsubmitId: "81e3410df123d09db7bb4e557df899af",
 };
@@ -258,25 +258,31 @@ function track(event, data) { if (window.fbq) window.fbq("track", event, data ||
     data.access_key = CONFIG.web3formsKey;
     if (data["E-Mail"]) data.replyto = data["E-Mail"]; // "Antworten" geht direkt an den Bewerber
 
-    // Übergangslösung: ohne Web3Forms-Schlüssel weiter über FormSubmit senden
-    const useWeb3 = /^[0-9a-f-]{30,}$/i.test(CONFIG.web3formsKey);
-    let ok = false;
-    if (!useWeb3) {
-      const send = () => fetch(`https://formsubmit.co/ajax/${CONFIG.formsubmitId}`, {
+    // Ausfallsicher: an beide Dienste gleichzeitig senden, jeweils mit Zeitlimit.
+    // Kommt einer durch, ist die Bewerbung angekommen. Doppelte Mails sortiert die Bewerber-Seite aus.
+    const post = (url, body, isOk) => {
+      const ctl = new AbortController();
+      const timer = setTimeout(() => ctl.abort(), 20000);
+      return fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...data, access_key: undefined, _subject: data.subject, _replyto: data.replyto, _template: "table", _captcha: "false" }),
-      }).then((r) => r.json()).then((j) => String(j.success) === "true");
-      try { ok = await send(); } catch (_) { ok = false; }
-      if (!ok) { try { await new Promise((r) => setTimeout(r, 1500)); ok = await send(); } catch (_) { ok = false; } }
-    } else try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(data),
-      });
-      ok = res.ok && (await res.json()).success;
-    } catch (_) { ok = false; }
+        body: JSON.stringify(body),
+        signal: ctl.signal,
+      }).then((r) => r.json()).then(isOk).catch(() => false).finally(() => clearTimeout(timer));
+    };
+    const viaWeb3 = CONFIG.web3formsKey
+      ? post("https://api.web3forms.com/submit", data, (j) => j.success === true)
+      : Promise.resolve(false);
+    const { access_key, ...rest } = data;
+    const viaFormSubmit = post(`https://formsubmit.co/ajax/${CONFIG.formsubmitId}`,
+      { ...rest, _subject: data.subject, _replyto: data.replyto, _template: "table", _captcha: "false" },
+      (j) => String(j.success) === "true");
+    // erster Erfolg gewinnt; nur wenn beide scheitern, Fehlermeldung
+    const ok = await new Promise((resolve) => {
+      let left = 2;
+      const done = (v) => { if (v) resolve(true); else if (--left === 0) resolve(false); };
+      viaWeb3.then(done); viaFormSubmit.then(done);
+    });
 
     if (!ok) {
       // Fehler sichtbar machen, statt die Bewerbung still zu verlieren
