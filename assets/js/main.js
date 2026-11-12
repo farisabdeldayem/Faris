@@ -6,7 +6,7 @@ const CONFIG = {
   metaPixelId: "",
   // Web3Forms Access Key (app.web3forms.com) – Bewerbungen kommen per E-Mail an.
   // Der Schlüssel ist öffentlich gedacht und darf im Code stehen.
-  web3formsKey: "WEB3FORMS_KEY",
+  web3formsKey: "85950f0c-e257-4610-a3b2-0d167ff2d366",
 };
 
 /* ---------- Navigation (Burger-Menü am Handy) ---------- */
